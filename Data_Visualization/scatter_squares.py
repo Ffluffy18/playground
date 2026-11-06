@@ -12,7 +12,7 @@ while num < 1000:
 
 plt.style.use('seaborn-v0_8')
 fig, ax = plt.subplots()
-ax.scatter(x_values, y_values, s=10, color=(0, .8, 0))
+ax.scatter(x_values, y_values, s=10, c=y_values, cmap=plt.cm.autumn)
 
 # Set chart title and label axes.
 ax.set_title("Square numbers", fontsize=24)
@@ -26,4 +26,6 @@ ax.set_xlabel("value", fontsize=24)
 ax.axis([0, 1100, 0, 1000000])
 ax.ticklabel_format(style='plain')
 
-plt.show()
+
+#plt.show()
+plt.savefig('squares_plot.png', bbox_inches='tight')
