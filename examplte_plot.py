@@ -9,5 +9,6 @@ import numpy as np
 # plt.show()
 
 fig, ax = plt.subplots()
-ax.plot([1, 2, 3, 4], [1, 4, 2, 3])
+#ax.plot([1, 2, 3, 4], [1, 4, 2, 3])
+plt.bar([1,2,3,4], [1,4,2,3])
 plt.show()
