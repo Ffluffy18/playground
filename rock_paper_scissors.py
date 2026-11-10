@@ -1,5 +1,7 @@
 import random
 
+computer_wins = 0
+
 def computer_choice():
     # picks the computers choice
     computer = random.randint(1,3)
@@ -14,7 +16,7 @@ def computer_choice():
         print(f'The computer picked {computer}')
     return computer
 
-def game(user, computer):
+def game(user, computer, player_wins=0):
     # gives you the outcome of a game
     if user == computer:
         print('Its a tie')
@@ -25,21 +27,21 @@ def game(user, computer):
     elif user == 'scissors' and computer == 'rock':
         print('You lose')
     else:
+        player_wins += 1
         print('You win')
+        return player_wins
 
     
 print('Welcome to rock, paper, scissors game this will be a best out of 3')
     
 while True:
     user = input('Choose either rock, paper, scissors: ').lower()
-    for u in ['rock', 'paper', 'scissors']:
-        if user != u:
-            print('invalid input')
-            break
-        else:
-            computer = computer_choice()
-            game(user, computer)
-            
-            retry = input('Would you like to play again: ')
-            if retry == 'n' or retry == 'no':
-                break
+
+    if user == 'rock' or user == 'paper' or user == 'scissors':
+        computer = computer_choice()
+        game(user, computer)
+        print(game(player_wins))
+    elif user == 'q':
+        break
+    else:
+        print("invalid input")
