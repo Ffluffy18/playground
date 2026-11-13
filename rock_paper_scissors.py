@@ -1,6 +1,7 @@
 import random
 
-computer_wins = 0
+pw = 0 # player wins
+cw = 0 # computer wins
 
 def computer_choice():
     # picks the computers choice
@@ -16,32 +17,52 @@ def computer_choice():
         print(f'The computer picked {computer}')
     return computer
 
-def game(user, computer, player_wins=0):
-    # gives you the outcome of a game
-    if user == computer:
-        print('Its a tie')
-    elif user == 'rock' and computer == 'paper':
-        print('You lose')
+def game(user, computer, con=0):
+    '''determines who wins or loses'''
+    if user == 'rock' and computer == 'paper':
+        con = con + 2
+        return con
+    elif user == 'rock' and computer == 'scissors':
+        con = con + 1
+        return con
     elif user == 'paper' and computer == 'scissors':
-        print('You lose')
+        con = con + 2
+        return con
+    elif user == 'paper' and computer == 'rock':
+        con = con + 1
+        return con
     elif user == 'scissors' and computer == 'rock':
-        print('You lose')
-    else:
-        player_wins += 1
-        print('You win')
-        return player_wins
+        con = con + 2
+        return con
+    elif user == 'scissors' and computer == 'paper':
+        con = con + 1
+        return con
 
-    
-print('Welcome to rock, paper, scissors game this will be a best out of 3')
-    
-while True:
+def wins(pw, cw):
+    ''' returns output saying outcome of the match'''
+    if pw == 1 and pw > cw:
+        print('you win')
+    elif cw == 1 and pw < cw:
+        print('you lose')
+    elif pw == 2 and pw > cw:
+        print('you won it all')
+    elif cw == 2 and pw < cw:
+        print('you lost it all')
+    elif cw == pw:
+        print('you are tied')
+
+while pw < 2 and cw < 2:
     user = input('Choose either rock, paper, scissors: ').lower()
-
-    if user == 'rock' or user == 'paper' or user == 'scissors':
-        computer = computer_choice()
-        game(user, computer)
-        print(game(player_wins))
-    elif user == 'q':
-        break
+    computer = computer_choice()
+    if user == computer:
+        print(f'this is a tie, the score is {pw}:{cw}')
     else:
-        print("invalid input")
+        con = game(user, computer)
+
+        if con == 1:
+            pw += 1
+        elif con == 2:
+            cw += 1
+        wins(pw, cw)
+
+print('GG')
