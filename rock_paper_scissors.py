@@ -90,24 +90,41 @@ def computerStrategy(playerhistory, max_key):
     return computer
 
 def displayResults():
+    print(" ")
     print(f'Total Rounds {rounds}')
+    print(" ")
     print(f'Human wins: {pw}')
     print(f'Computer wins: {cw}')
     print(f'Ties: {ties}')
+    print(" ")
     print(f'Human total payoff: {human_payoff}')
     print(f'Computer total payoff: {computer_payoff}')
+    print(" ")
     print(f'Human most common choice: {max_key}')
+    print(" ")
+    print(f'Computer Strategy: {choose_opponent}')
 
+
+choose_opponent = int(input('Choose opponent 1 or opponent 2: (1 or 2) '))
 # game loop
 while True:
     # user and computer choices
-    user = input("pick rock, paper, or scissors: ").lower()
-    computer = computerStrategy(playerHistory, max_key)
+    user = input("pick rock, paper, or scissors (q to quit): ").lower()
+    if choose_opponent == 1:
+        computer = computerStrategy(playerHistory, max_key)
+        choose_opponent = 'pattern based'
+    elif choose_opponent == 2:
+        computer = computer_choice()
+        choose_opponent = 'random'
+
     playerHistory.append(user)
+
 
     # player win or lose
     con = calculatePayoff(user, computer)
-
+    if user == 'q':
+        playerHistory.pop()
+        break
     if con == -1:
         cw += 1
         human_payoff -= 1
@@ -127,10 +144,7 @@ while True:
     else:
         playerHistory.pop()
         print('Invalid Input')
-    if user == 'q':
-        playerHistory.pop()
-        break
-        
+
     max_key = analyzeStrategy(playerHistory)
 
 displayResults()
